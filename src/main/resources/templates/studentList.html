@@ -27,6 +27,12 @@
 
 <h1>Список студентов</h1>
 
+<div>
+  <a href="/student/create">
+    <button>Добавить студента</button>
+  </a>
+</div>
+
 <div class="list-style">
   <table>
     <thead>
@@ -35,6 +41,7 @@
       <th>Имя</th>
       <th>Email</th>
       <th>Преподаватель</th>
+      <th>Действия</th>
     </tr>
     </thead>
     <tbody>
@@ -43,6 +50,14 @@
       <td th:text="${student.name}"></td>
       <td th:text="${student.email}"></td>
       <td th:text="${student.facultyModel.name}"></td>
+      <td>
+        <a th:href="@{/student/edit/{id}(id=${student.id})}">
+          <button>Редактировать</button>
+        </a>
+        <a th:href="@{/student/delete/{id}(id=${student.id})}">
+          <button>Удалить</button>
+        </a>
+      </td>
     </tr>
     </tbody>
   </table>
