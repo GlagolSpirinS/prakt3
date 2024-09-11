@@ -1,23 +1,60 @@
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Имя</th>
-    <th>Электронная почта</th>
-    <th>Факультет</th>
-    <th>Действия</th> <!-- Добавлено поле для действий -->
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="student : ${students}">
-    <td th:text="${student.id}"></td>
-    <td th:text="${student.name}"></td>
-    <td th:text="${student.email}"></td>
-    <td th:text="${student.facultyModel.name}"></td>
-    <td>
-      <a th:href="@{/student/edit/{id}(id=${student.id})}">Редактировать</a> |
-      <a th:href="@{/student/delete/{id}(id=${student.id})}" onclick="return confirm('Вы уверены, что хотите удалить этого студента?');">Удалить</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список студентов</title>
+  <style>
+    /* ... (styles from index.html) ... */
+
+    .list-style {
+      width: 100%;
+      border-collapse: collapse;
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Список студентов</h1>
+
+<div class="list-style">
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Email</th>
+      <th>Преподаватель</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+      <td th:text="${student.id}"></td>
+      <td th:text="${student.name}"></td>
+      <td th:text="${student.email}"></td>
+      <td th:text="${student.facultyModel.name}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div th:if="${errorMessage}" class="error-message">
+  [[${errorMessage}]]
+</div>
+
+<div th:if="${successMessage}" class="success-message">
+  [[${successMessage}]]
+</div>
+
+</body>
+</html>

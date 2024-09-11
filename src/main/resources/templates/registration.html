@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница</title>
+    <title>Регистрация</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,36 +52,33 @@
             color: red;
             margin-top: 5px;
         }
-
-        /* Стили для всех страниц со списками */
-        .list-style {
-            width: 100%;
-            border-collapse: collapse;
-            table,
-            th,
-            td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
-            th {
-                background-color: #f4f4f4;
-            }
-        }
     </style>
 </head>
 <body>
 
-<h1>Главная страница</h1>
+<h1>Регистрация</h1>
 
-<p>
-    <a href="/student">Список студентов</a> |
-    <a href="/faculty">Список преподавателей</a>
-</p>
+<form th:action="@{/registration}" th:object="${userModel}" method="post">
 
-<div th:if="${errorMessage}" class="error-message">
-    [[${errorMessage}]]
-</div>
+    <div th:if="${errorMessage}" class="error-message">
+        [[${errorMessage}]]
+    </div>
+
+    <div>
+        <label for="username">Логин:</label>
+        <input type="text" id="username" th:field="*{username}" />
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+    </div>
+
+    <div>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" th:field="*{password}" />
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    </div>
+
+    <button type="submit">Зарегистрироваться</button>
+
+</form>
 
 <div th:if="${successMessage}" class="success-message">
     [[${successMessage}]]

@@ -1,18 +1,56 @@
-<!-- facultyList.html -->
-<h1>Список факультетов</h1>
-<div th:if="${successMessage}" th:text="${successMessage}"></div>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Название</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="faculty : ${faculties}">
-        <td th:text="${faculty.id}"></td>
-        <td th:text="${faculty.name}"></td>
-    </tr>
-    </tbody>
-</table>
-<a href="/faculty/create">Добавить новый факультет</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список преподавателей</title>
+    <style>
+        /* ... (styles from index.html) ... */
+
+        .list-style {
+            width: 100%;
+            border-collapse: collapse;
+            table,
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f4f4f4;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Список преподавателей</h1>
+
+<div class="list-style">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="faculty : ${faculties}">
+            <td th:text="${faculty.id}"></td>
+            <td th:text="${faculty.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${errorMessage}" class="error-message">
+    [[${errorMessage}]]
+</div>
+
+<div th:if="${successMessage}" class="success-message">
+    [[${successMessage}]]
+</div>
+
+</body>
+</html>
