@@ -19,7 +19,15 @@
     <input type="text" th:field="*{personaDataModel.passportNumber}" placeholder="Номер паспорта" />
     <input type="text" th:field="*{personaDataModel.kod}" placeholder="Код" />
 
-    <input type="text" th:field="*{facultyModel.name}" placeholder="Название факультета" />
+<!--    <input type="text" th:field="*{facultyModel.name}" placeholder="Название факультета" />-->
+
+    <select th:field="*{facultyModel.id}" required>
+        <option value="" disabled selected>Выберите факультет</option>
+        <option th:each="faculty : ${faculties}" th:value="${faculty.id}" th:text="${faculty.name}"></option>
+    </select>
+
+    <label th:if="${#fields.hasErrors('facultyModel')}" th:errors="*{facultyModel}"></label>
+
 
     <button type="submit">Добавление студента</button>
 </form>

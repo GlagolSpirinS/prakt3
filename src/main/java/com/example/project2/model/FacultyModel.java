@@ -16,8 +16,16 @@ import lombok.Setter;
 public class FacultyModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotBlank(message = "Поле 'name' не может быть пустым")
     private String name;
+
+    @Override
+    public String toString() {
+        return "FacultyModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

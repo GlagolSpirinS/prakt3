@@ -3,18 +3,18 @@ package com.example.project2.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Table(name="students")
+@Table(name = "students")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,9 +33,23 @@ public class StudentModel {
     @OneToOne(cascade = CascadeType.ALL)
     private PersonaDataModel personaDataModel;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Transient
+    private Long facultyId; // Временное поле для хранения ID факультета
+
+    @ManyToOne
+    @JoinColumn(name = "faculty_id") // Внешний ключ
     private FacultyModel facultyModel;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<PredmetModel> predmetModel;
+
+    @Override
+    public String toString() {
+        return "StudentModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", faculty=" + (facultyModel != null ? facultyModel.getName() : "не назначен") +
+                '}';
+    }
 }

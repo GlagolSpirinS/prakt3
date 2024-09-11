@@ -1,0 +1,18 @@
+<!-- facultyList.html -->
+<h1>Список факультетов</h1>
+<div th:if="${successMessage}" th:text="${successMessage}"></div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="faculty : ${faculties}">
+        <td th:text="${faculty.id}"></td>
+        <td th:text="${faculty.name}"></td>
+    </tr>
+    </tbody>
+</table>
+<a href="/faculty/create">Добавить новый факультет</a>

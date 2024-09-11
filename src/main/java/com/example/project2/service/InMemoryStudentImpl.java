@@ -1,44 +1,49 @@
 package com.example.project2.service;
 
 import com.example.project2.model.StudentModel;
-import com.example.project2.repository.InMemoryStudentRepository;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-@Service
 public class InMemoryStudentImpl implements StudentService {
 
-    private final InMemoryStudentRepository studentRepository;
-
-    public InMemoryStudentImpl(InMemoryStudentRepository studentRepository){
-        this.studentRepository = studentRepository;
-    }
+    private final List<StudentModel> students = new ArrayList<>();
 
     @Override
-    public List<StudentModel> findAllStudent() {
-        return studentRepository.findAllStudent();
+    public List<StudentModel> getAllStudents() {
+        return new ArrayList<>(students);
     }
 
     @Override
     public StudentModel createStudent(StudentModel student) {
-        return  studentRepository.createStudent(student);
+        students.add(student);
+        return student;
     }
 
     @Override
     public StudentModel updateStudent(StudentModel student) {
-        return  studentRepository.updateStudent(student);
+        // Реализация обновления
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId().equals(student.getId())) {
+                students.set(i, student);
+                return student;
+            }
+        }
+        return null;
     }
 
     @Override
-    public StudentModel findStudentById(Long id) {
-        return studentRepository.findStudentById(id);
+    public StudentModel getStudentById(Long id) {
+        // Реализация поиска студента по ID
+        for (StudentModel student : students) {
+            if (student.getId().equals(id)) {
+                return student;
+            }
+        }
+        return null;
     }
 
     @Override
     public void deleteStudent(Long id) {
-        studentRepository.deleteStudent(id);
+        students.removeIf(student -> student.getId().equals(id));
     }
 }
