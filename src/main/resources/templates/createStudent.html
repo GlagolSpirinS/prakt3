@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/student/create" method="post" th:object="${studentModel}">
+    <input type="text" th:field="*{name}" placeholder="Имя" />
+    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
+
+    <input type="text" th:field="*{email}" placeholder="Почта" />
+    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
+
+    <input type="text" th:field="*{password}" placeholder="Пароль" />
+    <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
+
+    <input type="text" th:field="*{personaDataModel.passportSeria}" placeholder="Серия паспорта" />
+    <input type="text" th:field="*{personaDataModel.passportNumber}" placeholder="Номер паспорта" />
+    <input type="text" th:field="*{personaDataModel.kod}" placeholder="Код" />
+
+    <input type="text" th:field="*{facultyModel.name}" placeholder="Название факультета" />
+
+    <button type="submit">Добавление студента</button>
+</form>
+
+</body>
+</html>
