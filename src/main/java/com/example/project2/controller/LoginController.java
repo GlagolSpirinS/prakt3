@@ -25,6 +25,7 @@ public class LoginController {
     }
 
     @PostMapping
+    
     public String loginUser(@ModelAttribute("userModel") UserModel userModel, Model model) {
         // Implement your login logic here
         UserModel user = userService.findUserByUsernameAndPassword(userModel.getUsername(), userModel.getPassword());

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
-@Table(name = "users") // Название таблицы в базе данных
+@Table(name = "users")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -21,7 +21,6 @@ public class UserModel {
 
     @NotBlank(message = "Поле пароля не может быть пустым")
     private String password;
-
 
     @Override
     public String toString() {
